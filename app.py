@@ -27,11 +27,32 @@ async def root(request:Request):
 
     return templates.TemplateResponse(
           request=request,
-          name="registration.html"
+          name="login_page.html"
     )
 
+@app.get("/register")
+async def registration(request:Request):
 
+    return templates.TemplateResponse(
+          request=request,
+          name="registration_page.html"
+    )
 
+@app.get("/verify-page")
+def verify_page(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="verify_page.html"
+    )
+
+@app.get("/dashboard")
+def dashboard(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="dashboard.html"
+    )
 
 # db check endpoint
 @app.get("/db-check")

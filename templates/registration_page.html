@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/registration_page.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="page-intro">
+            <p class="eyebrow">Start here</p>
+            <h1>Make it yours.</h1>
+            <p>Create a secure profile and keep everything in one place.</p>
+        </section>
+
+        <section class="form-card" aria-labelledby="registration-title">
+            <header class="form-header">
+                <h2 id="registration-title">Create your account</h2>
+                <p>It only takes a minute to get started.</p>
+            </header>
+            <form id="user-registration">
+                <div class="form-grid">
+                    <div class="field field-full">
+                        <label for="full-name">Full name</label>
+                        <input type="text" name="full_name" id="full-name" placeholder="Enter your full name" autocomplete="name" required>
+                    </div>
+                    <div class="field field-full">
+                        <label for="registration-email">Email address</label>
+                        <input type="email" name="email" id="registration-email" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+                    <div class="field">
+                        <label for="phone-number">Phone number</label>
+                        <input type="tel" name="phone_number" id="phone-number" placeholder="10-digit number" autocomplete="tel" required>
+                    </div>
+                    <div class="field">
+                        <label for="date-of-birth">Date of birth</label>
+                        <input type="date" name="date_of_birth" id="date-of-birth" required>
+                    </div>
+                    <div class="field field-full">
+                        <label for="registration-password">Password</label>
+                        <input type="password" name="password" id="registration-password" placeholder="Create a strong password" autocomplete="new-password" required>
+                        <span class="error-message passwordError" aria-live="polite"></span>
+                    </div>
+                </div>
+                <button type="submit">Create account</button>
+                <p class="form-footer">Already registered? <a href="/">Log in</a></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="static/js/registration.js"></script>
+</body>
+
+</html>

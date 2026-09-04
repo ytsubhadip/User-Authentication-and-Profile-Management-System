@@ -1,0 +1,9 @@
+.verify-shell .form-card {
+    max-width: 500px;
+}
+
+#otp-input {
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+    text-align: center;
+}

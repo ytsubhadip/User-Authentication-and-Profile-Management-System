@@ -19,12 +19,12 @@ function ValidatePassword(password){
         return "Password must contain at least one special character";
     }
 
-    return null
+    return "";
 }
 
-function ValidatePhone(phone){
-    
-}
+// function ValidatePhone(phone){
+//        const phoneRegex = /^\d{10}$/;  
+// }
 
 RegistrationForm.addEventListener("submit", async function (e) {
 
@@ -46,6 +46,7 @@ RegistrationForm.addEventListener("submit", async function (e) {
         PasswordErrorShow.innerText = passwordError
         return;
     }
+    PasswordErrorShow.innerText = "";
     console.log(payload)
 
     try{
@@ -62,16 +63,15 @@ RegistrationForm.addEventListener("submit", async function (e) {
         const data = await response.json();
 
         if (response.ok){
-            alert("registrarion successful");
             console.log(data);
+            // show verification html page
+            window.location.href = "/verify-page";
+            localStorage.setItem("email", payload.email)
         }
        
-
     } catch(error){
-
         console.log("Error: ", error)
         alert("Something went wrong")
-
     }
 
 })

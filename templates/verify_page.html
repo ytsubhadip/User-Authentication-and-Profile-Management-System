@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify your email</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/verify_page.css">
+</head>
+
+<body>
+    <main class="page-shell verify-shell">
+        <section class="page-intro">
+            <p class="eyebrow">One last step</p>
+            <h1>Check your inbox.</h1>
+            <p>Use the one-time code we sent to your email address to finish setting up your account.</p>
+        </section>
+
+        <section class="form-card" aria-labelledby="verification-title">
+            <header class="form-header">
+                <h2 id="verification-title">Verify your email</h2>
+                <p>Enter the code from your email below.</p>
+            </header>
+            <form method="post" id="verification-form">
+                <div class="field">
+                    <label for="otp-input">Verification code</label>
+                    <input type="text" name="otp" id="otp-input" inputmode="numeric" autocomplete="one-time-code" placeholder="Enter your code" required>
+                </div>
+                <button type="submit">Verify email</button>
+            </form>
+        </section>
+    </main>
+    <script src="/static/js/email_verification.js"></script>
+</body>
+
+</html>

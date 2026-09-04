@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/login_page.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="page-intro">
+            <p class="eyebrow">Member access</p>
+            <h1>Welcome back.</h1>
+            <p>Sign in to continue managing your account and profile.</p>
+        </section>
+
+        <section class="form-card" aria-labelledby="login-title">
+            <header class="form-header">
+                <h2 id="login-title">Log in</h2>
+                <p>Enter your details below.</p>
+            </header>
+            <form id="loginForm">
+                <div class="field">
+                    <label for="user-email">Email address</label>
+                    <input type="email" name="email" id="user-email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+                <div class="field">
+                    <label for="user-password">Password</label>
+                    <input type="password" name="password" id="user-password" placeholder="Enter your password" autocomplete="current-password" required>
+                </div>
+                <button type="submit">Log in</button>
+                <p class="form-footer">New here? <a href="/register">Create an account</a></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="/static/js/login.js"></script>
+</body>
+</html>
