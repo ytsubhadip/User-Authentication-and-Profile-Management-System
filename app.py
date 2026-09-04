@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 from routes.auth_routes import auth_route
+from routes.image_upload_routes import profile_route
 from database.mongodb import db
 
 app = FastAPI(
@@ -21,6 +22,7 @@ app.mount(
 
 # add all route
 app.include_router(auth_route)
+app.include_router(profile_route)
 
 @app.get("/")
 async def root(request:Request):

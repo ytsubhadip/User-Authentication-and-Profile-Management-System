@@ -104,7 +104,7 @@ async def resend_otp(data: VerifyOTP):
     if not user:
         raise HTTPException(
             status_code=404,
-            detail="user not found"
+            detail="user not found" 
         )
 
     # Check if already verified
@@ -146,7 +146,7 @@ async def login(data: UserLogin):
     if not user:
         raise HTTPException(
             status_code=404,
-            detail="user not found"
+            detail="Email not found"
         )
 
     # check email verification
@@ -162,12 +162,19 @@ async def login(data: UserLogin):
             status_code=401,
             detail="Incorrect password"
         )
+    print(user.get("profile_image"))
     
      # Login successful
     return {
         "message": "Login successful",
-        "user_id": str(user["_id"]),
-        "email": user["email"]
+        "user_id": str(user.get("_id")),
+        "user": {
+            "email": user.get("email"),
+            "full_name": user.get("full_name"),
+            "phone_number": user.get("phone_number"),
+            "date_of_birth": user.get("date_of_birth"),
+            "profile_image": user.get("profile_image")
+        }
     }
 
     
