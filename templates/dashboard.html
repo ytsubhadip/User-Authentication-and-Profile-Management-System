@@ -11,8 +11,6 @@
         integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="/static/js/dashboard.js" defer></script>
-
-
 </head>
 
 <body>
@@ -25,7 +23,7 @@
                 <div class="profile-img">
                     <img id="profilepreview" alt="profile picture" class="profile-image">
 
-                    <label for="profileUpload" class="upload-btn"   >
+                    <label for="profileUpload" class="upload-btn">
                         <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
                     </label>
 
@@ -54,8 +52,10 @@
                     </div>
 
                     <button type="button" class="edit-profile-btn">
-                        <i class="fa-solid fa-pen"></i>
                         Edit Profile
+                    </button>
+                    <button type="button" class="edit-pssword-btn">
+                        Change Password
                     </button>
                     <button type="button" class="logout-btn" id="logoutBtn">
                         <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
@@ -63,7 +63,38 @@
                     </button>
                 </div>
             </div>
+
+            <div class="profile-edit">
+                <form method="post" id="ProfileEditForm">
+                    <label for="user_name">Name</label>
+                    <input type="text" name="userName" id="user_name">
+
+                    <label for="user_phone">Phone Number</label>
+                    <input type="number" name="userPhoneNumber" id="user_phone">
+
+                    <label for="user_dob">Date of Birth</label>
+                    <input type="date" name="userDOB" id="user_dob">
+
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+
+
+            <div class="password-edit">
+                <form method="post" id="passwordEditForm">
+                    <label for="old_password">Old Password</label>
+                    <input type="password" name="old_password" id="old_password" autocomplete="current-password" required>
+
+                    <label for="new_password">New Password</label>
+                    <input type="password" name="new_password" id="new_password" autocomplete="new-password" required>
+
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+            
         </section>
+
+
     </main>
 
 </body>

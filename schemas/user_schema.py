@@ -55,8 +55,24 @@ class UserRegistration(BaseModel):
 class VerifyOTP(BaseModel):
     email: EmailStr
     otp: str
+class ResentOTP(BaseModel):
+    email: EmailStr
 
+class ForgotPassword(BaseModel):
+    email: EmailStr
+    otp: str
+    newpassword:str
+
+class ChangePassword(BaseModel):
+    email: EmailStr
+    old_password: str
+    new_password: str = Field(min_length=10)
 
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class UpdateInfo(BaseModel):
+    full_name : str
+    phone_number: str = Field(min_length=10, max_length=10, description="User Phone Number")
+    date_of_birth: date 

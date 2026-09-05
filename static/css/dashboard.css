@@ -118,6 +118,11 @@
     background: var(--panel-soft);
 }
 
+.profile-edit {
+    margin-top: 30px;
+}
+
+
 @media (max-width: 560px) {
     .profile-section {
         grid-template-columns: 1fr;

@@ -3,7 +3,7 @@ from schemas.user_schema import UserRegistration, UserLogin
 from database.mongodb import user_collection
 from services.otp_services import generate_otp, send_email
 from datetime import datetime, timedelta
-from schemas.user_schema import VerifyOTP
+from schemas.user_schema import VerifyOTP, ResentOTP, ForgotPassword, ChangePassword
 
 
 auth_route = APIRouter(prefix="/api/auth")
@@ -98,7 +98,7 @@ async def verify_email(data:VerifyOTP):
     }
 
 @auth_route.post("/resend-otp")
-async def resend_otp(data: VerifyOTP):
+async def resend_otp(data: ResentOTP):
     # Find user by email
     user = await user_collection.find_one({"email": data.email})
     if not user:
@@ -132,6 +132,91 @@ async def resend_otp(data: VerifyOTP):
     return {
         "message": "New OTP sent to your email."
     }
+
+
+@auth_route.post("/forgot-password-otp")
+async def forgot_password_otp(data: ResentOTP):
+
+    user = await user_collection.find_one({"email": data.email})
+    # if user not exist
+    if not user:
+        raise HTTPException(status_code=402,
+                            detail="user not found")
+
+    # Generate new OTP
+    otp = generate_otp()
+    expiry_time = datetime.utcnow() + timedelta(minutes=5)
+
+    # Update user with new OTP and expiry time
+    await user_collection.update_one(
+            {"email": data.email},
+            {
+                "$set": {
+                    "otp": otp,
+                    "expiry_time": expiry_time
+                }
+            }
+        )
+
+     # Send new OTP via email
+    send_email(data.email, otp)
+
+    return{
+        "message":"Forgot Password OTP send you email"
+    }
+
+@auth_route.put("/forgot-password")
+async def forgot_password(data: ForgotPassword):
+    user = await user_collection.find_one({"email":data.email})
+
+    # check user exist
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # check otp expiry
+    if datetime.utcnow() > user["expiry_time"]:
+        raise HTTPException(status_code=400, detail="OTP expired")
+
+    # check otp
+    if user.get("otp") != data.otp:
+        raise HTTPException(status_code=400, detail="Invalid OTP")
+
+    # update password
+    await user_collection.update_one(
+        {"email": data.email
+},
+        {
+            "$set": {
+                "password": data.newpassword
+            },
+            "$unset": {
+                "otp": "",
+                "expiry_time": ""
+            }
+        }
+    )
+
+    return {
+        "message": "Password updated successfully"
+
+    }
+
+@auth_route.put("/change-password")
+async def change_password(data: ChangePassword):
+    user = await user_collection.find_one({"email": data.email})
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    if user.get("password") != data.old_password:
+        raise HTTPException(status_code=401, detail="Old password is incorrect")
+
+    await user_collection.update_one(
+        {"email": data.email},
+        {"$set": {"password": data.new_password}}
+    )
+
+    return {"message": "Password changed successfully"}
 
 
 @auth_route.post("/login")

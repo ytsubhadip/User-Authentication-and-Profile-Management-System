@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 from routes.auth_routes import auth_route
-from routes.image_upload_routes import profile_route
+from routes.profile_routes import profile_route
 from database.mongodb import db
 
 app = FastAPI(
@@ -54,6 +54,14 @@ def dashboard(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="dashboard.html"
+    )
+
+@app.get("/forgot-password")
+def forgot_password(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="forgot_password.html"
     )
 
 # db check endpoint
